@@ -1,6 +1,3 @@
-# This file only has the code content of
-# The jupyter notebook of the previous file.
-
 import pandas as pd
 
 nome_arquivo = input("Digite o nome do arquivo:\n")
@@ -11,7 +8,7 @@ try:
 except:
     print("Arquivo nao existe.\nSera criado:")
     df = pd.DataFrame(columns = c)[c]
-
+    
 menu = """
 1 - visualizar
 2 - ordenar
@@ -37,23 +34,24 @@ while True:
     elif op == "3":
         al = input("Digite linha, coluna e novo valor separados por espaço.\n").split(" ")
         df.iloc[int(al[0]), int(al[1])] = float(al[2])
-
+        
     elif op == "4":
         al = input("Digite o novos valores separados por espaço.\n").split(" ")
         for i in range (4):
             al[i] = float(al[i])
         df2 = pd.DataFrame([al], columns = c)[c]
-        df = df.append(df2)
-
+        print(df)
+        df = pd.concat([df, df2])
+        
     elif op == "5":
         liera = input("Linha que será apagada:\n")
         df.drop(index = int(liera), inplace = True)
         df.reset_index(inplace = True)
-
+        
     elif op == "6":
         df.to_csv(nome_arquivo, index = False, header = False)
         print("Arquivo salvo.")
-
+        
     elif op == "7":
         print("fim.")
         break
